@@ -1,14 +1,26 @@
 import ProductCard from "@/components/product/ProductCard";
-import { productData } from "@/pages/api/product/db/data";
+import useFetchAllProducts from "@/hooks/useFetchAllProducts";
+
+function AllProducts() {
+  const { data: products, isSuccess, isLoading } = useFetchAllProducts();
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!isSuccess) {
+    return <p>Failed to load products.</p>;
+  }
+
+  return products.map((p) => <ProductCard item={p} key={p.code} />);
+}
 
 export default function Home() {
   return (
     <main className="flex w-screen">
       <div className="bg-zinc-200 m-2 rounded-md p-2">Menu</div>
       <div className="bg-zinc-200 m-2 rounded-md grid grid-cols-3 w-screen">
-        {productData.products.map((item, idx) => (
-          <ProductCard item={item} key={item.code} />
-        ))}
+        <AllProducts />
       </div>
       <div className="bg-zinc-200 m-2 rounded-md p-2">Right</div>
     </main>

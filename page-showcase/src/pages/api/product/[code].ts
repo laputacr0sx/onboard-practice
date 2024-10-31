@@ -24,12 +24,14 @@ export default function handler(
 
     const { code: productCode, name, images, description } = product;
 
-    res.status(200).json({
-      code: productCode,
-      name,
-      images,
-      description,
-    });
+    res.status(200).json(product);
+
+    // res.status(200).json({
+    //   code: productCode,
+    //   name,
+    //   images,
+    //   description,
+    // });
   } catch (error) {
     res
       .status(500)

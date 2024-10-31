@@ -12,3 +12,7 @@ export function getProductByProductCode(code: string | string[]): Product {
 
   return foundProduct[0];
 }
+
+export function getAllProducts(): Product[] {
+  return productData.products;
+}

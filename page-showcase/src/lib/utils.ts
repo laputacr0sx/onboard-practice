@@ -23,3 +23,18 @@ export function validateImageUrl(images: Product["images"]): string {
 
   return validImages[0].url;
 }
+
+export function extractText(html: string): string {
+  const div = document.createElement("div");
+  div.innerHTML = html;
+  const span = div.querySelector("span");
+  return span ? span.textContent || "" : "";
+}
+
+export function validateName(product: Product): string {
+  if (product.name === undefined) {
+    return extractText(product.description);
+  }
+
+  return product.name;
+}

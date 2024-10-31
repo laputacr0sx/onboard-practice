@@ -1,6 +1,5 @@
-import { cn, validateImageUrl } from "@/lib/utils";
+import { cn, validateImageUrl, validateName } from "@/lib/utils";
 import { Product } from "@/types/product.type";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useMemo, useState } from "react";
 import { Button } from "../ui/button";
@@ -12,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import ProductImage from "./ProductImage";
 
 type ProductCardProps = {
   item: Product;
@@ -24,59 +24,50 @@ function ProductCard({ item }: ProductCardProps) {
   const r = useRouter();
 
   const memoImageUrl = useMemo(() => validateImageUrl(item.images), [item]);
-
-  // const imgUrl = validateImageUrl(item.images);
+  const productName = validateName(item);
 
   return (
-    <>
-      <Card
-        className={cn(
-          "py-2 bg-white rounded-sm m-3 flex flex-col items-center px-8 gap-6",
-          isSelected &&
-            "py-2 bg-zinc-300 rounded-sm m-3 flex flex-col justify-center items-center px-8 gap-6"
-        )}
-      >
-        <CardHeader>
-          <Image
-            width={200}
-            height={200}
-            src={memoImageUrl}
-            alt={item.brandName}
-            placeholder="empty"
-          />
-        </CardHeader>
-        <CardContent className="flex flex-col gap-4">
-          <section className="flex text-xs gap-8">
-            <Button
-              size={"sm"}
-              variant={"outline"}
-              className="text-cyan-300 border-cyan-300"
-              onClick={() => setIsPreviewing((p) => !p)}
-            >
-              Preview
-            </Button>
-            <Button
-              size={"sm"}
-              variant={"outline"}
-              className="text-cyan-300 border-cyan-300"
-              onClick={() => {
-                r.push(`product/${item.code}`);
-              }}
-            >
-              Detail
-            </Button>
-          </section>
-          <CardTitle>{item.name}</CardTitle>
-        </CardContent>
-        {isPreviewing && (
-          <Preview
-            item={item}
-            setIsSelected={setIsSelected}
-            isSelected={isSelected}
-          />
-        )}
-      </Card>
-    </>
+    <Card
+      className={cn(
+        "py-2 bg-white rounded-sm m-3 flex flex-col items-center px-8 gap-6",
+        isSelected &&
+          "py-2 bg-zinc-300 rounded-sm m-3 flex flex-col justify-center items-center px-8 gap-6"
+      )}
+    >
+      <CardHeader>
+        <ProductImage imgUrl={memoImageUrl} altName={item.brandName} />
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4">
+        <section className="flex text-xs gap-8">
+          <Button
+            size={"sm"}
+            variant={"outline"}
+            className="text-cyan-300 border-cyan-300"
+            onClick={() => setIsPreviewing((p) => !p)}
+          >
+            Preview
+          </Button>
+          <Button
+            size={"sm"}
+            variant={"outline"}
+            className="text-cyan-300 border-cyan-300"
+            onClick={() => {
+              r.push(`product/${item.code}`);
+            }}
+          >
+            Detail
+          </Button>
+        </section>
+        <CardTitle>{productName}</CardTitle>
+      </CardContent>
+      {isPreviewing && (
+        <Preview
+          item={item}
+          setIsSelected={setIsSelected}
+          isSelected={isSelected}
+        />
+      )}
+    </Card>
   );
 }
 

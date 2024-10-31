@@ -1,11 +1,10 @@
 import { encode } from "querystring";
 
-import useGetProductByProductCode from "@/hooks/useFetchProductByProductCode";
+import ProductImage from "@/components/product/ProductImage";
+import useFetchProductByProductCode from "@/hooks/useFetchProductByProductCode";
+import { validateImageUrl, validateName } from "@/lib/utils";
 import parse from "html-react-parser";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import Image from "next/image";
-import { Product } from "@/types/product.type";
-import { validateImageUrl } from "@/lib/utils";
 
 function ProductDetail({
   productPage: { code },
@@ -14,7 +13,7 @@ function ProductDetail({
     data: product,
     isSuccess,
     isLoading,
-  } = useGetProductByProductCode(code);
+  } = useFetchProductByProductCode(code);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -28,19 +27,18 @@ function ProductDetail({
 
   const imageUrl = validateImageUrl(images);
 
+  const productName = validateName(product);
+
   return (
     <div className="mx-20 py-10">
-      <p className="text-5xl font-bold">{product.name}</p>
-      <section className="">
-        <Image
-          placeholder="empty"
-          src={imageUrl}
-          alt={name ?? ""}
-          width={300}
-          height={300}
-        />
-        <div className="m-10 p-10">{parse(description)}</div>
-      </section>
+      <p className="text-5xl font-bold my-4">{productName}</p>
+      <ProductImage
+        imgUrl={imageUrl}
+        altName={product.brandName}
+        width={300}
+        height={300}
+      />
+      <div className="m-10 p-10">{parse(description)}</div>
     </div>
   );
 }

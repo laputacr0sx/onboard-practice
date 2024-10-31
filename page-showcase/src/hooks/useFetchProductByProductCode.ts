@@ -11,7 +11,9 @@ const fetchProductByProductCode = async (
   return res.data;
 };
 
-export default function useGetProductByProductCode(productCode: string | null) {
+export default function useFetchProductByProductCode(
+  productCode: string | null
+) {
   return useQuery({
     queryKey: ["todos"],
     queryFn: () => fetchProductByProductCode(productCode),
