@@ -4,7 +4,7 @@ import { Product } from "@/types/product.type";
 import { useQuery } from "@tanstack/react-query";
 
 const fetchProductByProductCode = async (
-  productCode: string | null
+  productCode: string | string[] | undefined,
 ): Promise<Product> => {
   const res = await axios.get<Product>(`/api/product/${productCode}`);
 
@@ -12,7 +12,7 @@ const fetchProductByProductCode = async (
 };
 
 export default function useFetchProductByProductCode(
-  productCode: string | null
+  productCode: string | string[] | undefined,
 ) {
   return useQuery({
     queryKey: ["todos"],
