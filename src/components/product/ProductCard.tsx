@@ -22,13 +22,9 @@ type PreviewProps = {
 function Preview({ item, setIsSelected, isSelected }: PreviewProps) {
     return (
         <>
-            <CardDescription className="flex flex-col justify-center">
-                <section className="align-middle text-center">
-                    <p className="text-sm font-semibold">{item.code}</p>
-                    <p className="font-bold text">
-                        {item.price?.formattedValue}
-                    </p>
-                </section>
+            <CardDescription className="flex flex-col justify-center align-middle text-center">
+                <p className="text-sm font-semibold">{item.code}</p>
+                <p className="font-bold text">{item.price?.formattedValue}</p>
             </CardDescription>
             <CardFooter>
                 <Button
