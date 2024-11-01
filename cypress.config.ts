@@ -1,7 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { defineConfig } from 'cypress';
 
 export default defineConfig({
-    projectId: '8npnau',
+    projectId: 'm5whbw',
 
     e2e: {
         setupNodeEvents(on, config) {
