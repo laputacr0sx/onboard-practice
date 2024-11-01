@@ -1,6 +1,6 @@
-import { Product } from "./product.type";
+import { Product } from './product.type';
 
 export type ConciseProduct = Pick<
-  Product,
-  "code" | "name" | "images" | "description"
+    Product,
+    'code' | 'name' | 'images' | 'description'
 >;

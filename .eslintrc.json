@@ -1,36 +1,57 @@
 {
-  "extends": ["airbnb", "next/core-web-vitals", "plugin:prettier/recommended"],
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  },
-  "plugins": ["prettier"],
-  "rules": {
-    "react/require-default-props": [
-      "error",
-      {
-        "forbidDefaultForRequired": true,
-        "functions": "defaultArguments"
-      }
+    "extends": [
+        "airbnb",
+        "next/core-web-vitals",
+        "plugin:prettier/recommended"
     ],
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
+    "plugins": ["prettier"],
+    "rules": {
+        "react/jsx-props-no-spreading": 0,
 
-    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+        "import/prefer-default-export": 0,
 
-    "prettier/prettier": "error",
-    "no-unused-vars": "warn",
-    "no-console": "off",
-    "func-names": "off",
-    "no-process-exit": "off",
-    "object-shorthand": "off",
-    "class-methods-use-this": "off",
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-    ]
-  }
+        "no-use-before-define": [
+            "error",
+            {
+                "functions": true,
+                "classes": true,
+                "variables": true,
+                "allowNamedExports": false
+            }
+        ],
+
+        "react/require-default-props": [
+            "error",
+            {
+                "forbidDefaultForRequired": true,
+                "functions": "defaultArguments"
+            }
+        ],
+
+        "react/jsx-filename-extension": [
+            2,
+            { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+        ],
+
+        "prettier/prettier": "error",
+        "no-unused-vars": "warn",
+        "no-console": "off",
+        "func-names": "off",
+        "no-process-exit": "off",
+        "object-shorthand": "off",
+        "class-methods-use-this": "off",
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "js": "never",
+                "jsx": "never",
+                "ts": "never",
+                "tsx": "never"
+            }
+        ]
+    }
 }
