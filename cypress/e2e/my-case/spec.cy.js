@@ -1,12 +1,19 @@
 describe('My First Test', () => {
-    it('Visit the Demo App', () => {
+    it('Visit the App', () => {
+        cy.intercept('GET', '/api/product', { fixture: 'products.json' }).as(
+            'fetchProducts'
+        );
+
         cy.visit('http://localhost:3000');
 
-        cy.contains('Preview').click();
-
-        cy.contains(
-            'p.text-sm:nth-child(1)',
-            'H6588002_S_ST_Sony_Xperia1_64_JP_Black'
-        );
+        // cy.get('li.bg-zinc-200')
+        //     .eq(0)
+        //     .should('contain.text', 'Xperia 1 6/64GB 平行進口 日本版 [3色]');
+        //
+        // cy.get('li.bg-zinc-200')
+        //     .eq(1)
+        //     .should('contain.text', 'Xperia 1 6GB+128GB 夜黑色 香港行貨');
+        //
+        //
     });
 });
