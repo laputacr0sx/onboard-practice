@@ -57,46 +57,51 @@ export default function ProductCard({ item }: ProductCardProps) {
     const productName = validateName(item);
 
     return (
-        <Card
-            className={cn(
-                'py-2 bg-white rounded-sm m-3 flex flex-col items-center px-8 gap-6',
-                isSelected &&
-                    'py-2 bg-zinc-300 rounded-sm m-3 flex flex-col justify-center items-center px-8 gap-6'
-            )}
-        >
-            <CardHeader>
-                <ProductImage imgUrl={memoImageUrl} altName={item.brandName} />
-            </CardHeader>
-            <CardContent className="flex flex-col gap-4">
-                <section className="flex text-xs gap-8">
-                    <Button
-                        size="sm"
-                        variant="outline"
-                        className="text-cyan-300 border-cyan-300"
-                        onClick={() => setIsPreviewing((p) => !p)}
-                    >
-                        Preview
-                    </Button>
-                    <Button
-                        size="sm"
-                        variant="outline"
-                        className="text-cyan-300 border-cyan-300"
-                        onClick={() => {
-                            r.push(`product/${item.code}`);
-                        }}
-                    >
-                        Detail
-                    </Button>
-                </section>
-                <CardTitle>{productName}</CardTitle>
-            </CardContent>
-            {isPreviewing && (
-                <Preview
-                    item={item}
-                    setIsSelected={setIsSelected}
-                    isSelected={isSelected}
-                />
-            )}
-        </Card>
+        <li>
+            <Card
+                className={cn(
+                    'py-2 bg-white rounded-sm m-3 flex flex-col items-center px-8 gap-6',
+                    isSelected &&
+                        'py-2 bg-zinc-300 rounded-sm m-3 flex flex-col justify-center items-center px-8 gap-6'
+                )}
+            >
+                <CardHeader>
+                    <ProductImage
+                        imgUrl={memoImageUrl}
+                        altName={item.brandName}
+                    />
+                </CardHeader>
+                <CardContent className="flex flex-col gap-4">
+                    <section className="flex text-xs gap-8 justify-center items-center">
+                        <Button
+                            size="sm"
+                            variant="outline"
+                            className="text-cyan-300 border-cyan-300"
+                            onClick={() => setIsPreviewing((p) => !p)}
+                        >
+                            Preview
+                        </Button>
+                        <Button
+                            size="sm"
+                            variant="outline"
+                            className="text-cyan-300 border-cyan-300"
+                            onClick={() => {
+                                r.push(`product/${item.code}`);
+                            }}
+                        >
+                            Detail
+                        </Button>
+                    </section>
+                    <CardTitle>{productName}</CardTitle>
+                </CardContent>
+                {isPreviewing && (
+                    <Preview
+                        item={item}
+                        setIsSelected={setIsSelected}
+                        isSelected={isSelected}
+                    />
+                )}
+            </Card>
+        </li>
     );
 }

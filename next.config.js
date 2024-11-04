@@ -1,5 +1,17 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
+    headers: () => [
+        {
+            source: '/api/product/',
+            headers: [
+                {
+                    key: 'Cache-Control',
+                    value: 'no-cache'
+                }
+            ]
+        }
+    ],
     reactStrictMode: true,
     images: {
         remotePatterns: [

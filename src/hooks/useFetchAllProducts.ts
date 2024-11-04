@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 async function fetchAllProducts(): Promise<Product[]> {
-    const res = await axios.get('/api/product/');
+    const res = await axios.get('/api/product');
 
     return res.data;
 }
